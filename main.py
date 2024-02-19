@@ -5,12 +5,26 @@ See assignment-01.pdf for details.
 # no imports needed.
 
 def foo(x):
-    ### TODO
+    if x ==0:
+      return 0
+    else:
+      return x + foo(x-1)
     pass
 
 def longest_run(mylist, key):
-    ### TODO
-    pass
+  seqAmnt = 0
+  maxSeq = 0
+  for number in mylist:
+    if number == key and seqAmnt == 0:
+      seqAmnt = 1
+    elif number == key and seqAmnt > 0:
+      seqAmnt += 1
+    else:
+      seqAmnt = 0
+    if seqAmnt > maxSeq:
+      maxSeq = seqAmnt
+  return maxSeq
+      
 
 
 class Result:
@@ -37,7 +51,16 @@ def to_value(v):
         return int(v)
         
 def longest_run_recursive(mylist, key):
-    ### TODO
+    def find_longest_run(mylist, key, currentStreak, maxStreak):
+      if not mylist:
+        return maxStreak
+      if mylist[0] == key:
+        currentStreak += 1
+        maxStreak = max(maxStreak, currentStreak)
+      else:
+        currentStreak = 0
+      return find_longest_run(mylist[1:], key, currentStreak, maxStreak)
+    return find_longest_run(mylist, key, 0, 0)
     pass
 
 
